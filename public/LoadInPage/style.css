@@ -1,0 +1,94 @@
+html {
+   height: 100%;
+}
+
+body {
+   height: 100%;
+   margin: 0;
+}
+
+#loadBackground {
+   width: 100%;
+   height: 100%;
+   margin: 0;
+   background: linear-gradient(290deg,#c454a8,#494BFF, #c454a8);
+   visibility: visible;
+   position: absolute;
+   z-index: 10;
+   background-size: 300% 300%;
+}
+
+.animationEle {
+   animation: color 10s ease-in-out infinite alternate-reverse;
+}
+
+#loadText {
+   font-family: 'Leckerli One', cursive;
+   color: white;
+   position: absolute;
+   animation-name: moveing;
+   animation-duration: 3s;
+   animation-delay: 3s;
+   animation-fill-mode: forwards;
+   top: 45%;
+   left: 44%;
+   font-size: 90px;
+   user-select: none;
+}
+
+@keyframes moveing {
+   0% {left: 44%;top: 45%;font-size: 90px;}
+   100% {left: 30px;top: 30px; font-size: 50px;}
+}
+
+#root {
+   height: 100%;
+   margin: 0;
+   display: none;
+   background: linear-gradient(290deg,#c454a8,#494BFF, #c454a8);
+   flex-direction: column;
+   position: relative;
+   background-size: 300% 300%;
+}
+
+@keyframes color {
+   0% {background-position: 0 50%;}
+   50% {background-position: 100% 50%;}
+   100% {background-position: 0 50%;}
+
+}
+
+#top {
+   height: 10%;
+   display: flex;
+   align-items: center;
+   box-sizing: border-box;
+   padding: 30px;
+   font-family: 'Leckerli One', cursive;
+   font-size: 50px;
+   color: white;
+   user-select: none;
+}
+
+#middle {
+   height: 90%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   z-index: 20;
+}
+
+#fileButton {
+   background-color: white;
+   padding: 30px 0px 30px 30px;
+   border-radius: 25px;
+   font-family: 'Gowun Dodum', sans-serif;
+   font-size: 20px;
+   box-sizing: border-box;
+   cursor: pointer;
+}
+
+#fileButton:hover {
+   box-shadow: 0px 0px 15px 0px;
+}
+
