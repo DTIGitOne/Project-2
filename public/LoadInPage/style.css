@@ -11,7 +11,7 @@ body {
    width: 100%;
    height: 100%;
    margin: 0;
-   background: linear-gradient(290deg,#c454a8,#494BFF, #c454a8);
+   background: transparent;
    visibility: visible;
    position: absolute;
    z-index: 10;
@@ -41,10 +41,15 @@ body {
    100% {left: 30px;top: 30px; font-size: 50px;}
 }
 
+@keyframes moveing2 {
+   0% {left: 30px;top: 30px; font-size: 50px;}
+   100% {left: 44%;top: 45%;font-size: 90px;}
+}
+
 #root {
    height: 100%;
    margin: 0;
-   display: none;
+   display: flex;
    background: linear-gradient(290deg,#c454a8,#494BFF, #c454a8);
    flex-direction: column;
    position: relative;
@@ -55,7 +60,6 @@ body {
    0% {background-position: 0 50%;}
    50% {background-position: 100% 50%;}
    100% {background-position: 0 50%;}
-
 }
 
 #top {
@@ -76,19 +80,57 @@ body {
    justify-content: center;
    align-items: center;
    z-index: 20;
+   display: none;
 }
 
 #fileButton {
-   background-color: white;
-   padding: 30px 0px 30px 30px;
-   border-radius: 25px;
-   font-family: 'Gowun Dodum', sans-serif;
-   font-size: 20px;
-   box-sizing: border-box;
-   cursor: pointer;
 }
 
 #fileButton:hover {
    box-shadow: 0px 0px 15px 0px;
+}
+
+#upload {
+   opacity: 1;
+   transition: opacity 1s;
+}
+
+#sendButton {
+   position: relative;
+   padding: 20px 40px;
+   font-size: 23px;
+   line-height: 1.5;
+   border-radius: 23px;
+   color: black;
+   font-weight: 500;
+   background-color: white;
+   border: 0;
+   overflow: hidden;
+   font-family: 'Gowun Dodum', sans-serif;
+   animation-duration: 1s;
+   transition-duration: 0.15s;
+}
+
+.hidden {
+   opacity: 0;
+}
+
+@keyframes leaveButton {
+   0%{opacity: 100;} 
+   100% {opacity: 0;}
+}
+
+#sendButton:hover {
+   box-shadow: 0px 0px 18px 2px;
+   background-color: #F9F9F9;
+}
+
+input[type="file"]{
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: scale(5);
+  opacity: 0;
 }
 

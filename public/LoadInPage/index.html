@@ -11,16 +11,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 </head>
 <body>
-   <div id="loadBackground" class="animationEle">
+   <div id="loadBackground">
       <div id="loadText">PX.Foto</div>
    </div>
    <div id="root" class="animationEle">
       <div id="top">
       </div>
       <div id="middle">
-         <input type="file" title="Select your image" id="fileButton">
+         <div id="upload">
+            <button id="sendButton">
+               <i id="fileButton"></i> Insert Image
+               <input type="file" id="inpFile">
+            </button>
+         </div>
       </div>
    </div>
-   <script defer src="loadinpage.js"></script>
+   <script type="module" defer src="loadinpage.mjs"></script>
 </body>
 </html>
