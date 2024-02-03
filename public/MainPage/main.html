@@ -1,8 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+   <link rel="stylesheet" href="style2.css">
 </head>
 <body>
+   <div id="root">
+      <div id="top">
+         <div id="canvas"></div>
+      </div>
+      <div id="bottom">
+         <div id="dragElement" draggable="true" ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="drop(event)>
+            <div id="dropDrag"></div>
+               <i id="menuLogo" class="material-icons">menu</i>
+            </div>
+            <div id="dropMenu">
+               <div id="layer1" class="layer"></div>
+               <div id="layer2" class="layer"></div>
+               <div id="layer3" class="layer"></div>
+            </div>
+         </div>
+      </div>
+   </div>
    <script type="module" defer src="main.mjs"></script>
 </body>
 </html>

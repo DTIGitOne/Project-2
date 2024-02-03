@@ -31,7 +31,7 @@ body {
    animation-delay: 3s;
    animation-fill-mode: forwards;
    top: 45%;
-   left: 44%;
+   left: 41%;
    font-size: 90px;
    user-select: none;
 }
@@ -134,3 +134,18 @@ input[type="file"]{
   opacity: 0;
 }
 
+@media only screen and (max-width: 768px) {
+   @keyframes moveing {
+      0% {left: 22%;top: 45%;font-size: 70px;}
+      100% {left: 30px;top: 30px; font-size: 50px;}
+   }
+   
+   @keyframes moveing2 {
+      0% {left: 30px;top: 30px; font-size: 50px;}
+      100% {left: 22%;top: 45%;font-size: 70px;}
+   }
+   #loadText {
+      left: 22%;
+      font-size: 70px;
+   }
+}

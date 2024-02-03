@@ -19,8 +19,6 @@ setInterval(() => {
    loadBackground.style.background = "rgba(0,0,0,0)";
 }, 7000);
 
-let roki = "roki";
-
 sendButton.addEventListener('click' , function () {
 
    let colorRandom1 = '#' + parseInt(Math.random() * 0xffffff).toString(16);
@@ -50,7 +48,6 @@ inpFile.addEventListener('change' , function(){
   }
 });
 
-export {roki};
 /*
 sendButton.addEventListener('submit' , e => {
    e.preventDefault();
