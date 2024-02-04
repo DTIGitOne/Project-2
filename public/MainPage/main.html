@@ -10,18 +10,40 @@
          <div id="canvas"></div>
       </div>
       <div id="bottom">
-         <div id="dragElement" draggable="true" ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="drop(event)>
-            <div id="dropDrag"></div>
+         <div id="dragElement">
+            <div id="dropDrag">
                <i id="menuLogo" class="material-icons">menu</i>
             </div>
             <div id="dropMenu">
                <div id="layer1" class="layer"></div>
                <div id="layer2" class="layer"></div>
-               <div id="layer3" class="layer"></div>
+               <div id="layer3" class="layer">
+                  <div id="crop" class="IconsBox">
+                     <i class="material-icons iconsSize1">crop</i>
+                  </div>
+                  <div id="brightness" class="IconsBox">
+                     <i class="material-icons iconsSize2">brightness_5</i>
+                  </div>
+                  <div class="IconsBox">
+                     <i class="material-icons iconsSize3">filter</i>
+                  </div>
+                  <div class="IconsBox">
+                     <i class="material-icons iconsSize4">exposure</i>
+                  </div>
+                  <div class="IconsBox">
+                     <i class="material-icons iconsSize5">blur_on</i>
+                  </div>
+                  <div class="IconsBox">
+                     <i class="material-icons iconsSize6">text_fields</i>
+                  </div>
+                  <div class="IconsBox">
+                     <i class="material-icons iconsSize7"></i>
+                  </div>
+               </div>
             </div>
          </div>
       </div>
    </div>
-   <script type="module" defer src="main.mjs"></script>
+   <script type="module" defer src="main.js"></script>
 </body>
 </html>
