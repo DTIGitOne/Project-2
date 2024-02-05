@@ -1,3 +1,4 @@
+let root = document.getElementById("root");
 let dropMenu = document.getElementById("dropMenu");
 let dropDrag = document.getElementById("dropDrag");
 let layer1 = document.getElementById("layer1");
@@ -9,12 +10,17 @@ let crop = document.getElementById("crop");
 let iconsSize1 = document.querySelector('.iconsSize1');
 let brightness = document.getElementById("brightness");
 let iconsSize2 = document.querySelector('.iconsSize2');
+let cropWindow = document.getElementById("cropWindow");
+let topMenu = document.getElementById("topMenu");
+let bottom = document.getElementById("bottom");
+let top1 = document.getElementById("top");
+let cancelButton = document.getElementById("cancelButton");
 
 let image = document.createElement('img');
 image.setAttribute('src' , '../../uploads/dog2.jpeg');
 image.className = "image";
 canvas.append(image);
-
+1
 function getAverageColor(element) {
    return new Promise((resolve, reject) => {
       let canvas1 = document.createElement("canvas");
@@ -114,6 +120,39 @@ crop.addEventListener("click" , function(){
    crop1.className = "material-icons iconsSize2";
    crop1.innerHTML = "crop";
    box1.append(crop1);
+   
+   //crop elements
+   crop1.addEventListener('click' , function(){
+      crop1.style.color = colorIcon;
+
+      setInterval(() => {
+   
+      layer1.style.opacity = "1";
+
+      topMenu.style.display = "none";
+      bottom.style.display = "none";
+      root.style.justifyContent = "center";
+      top1.style.opacity = "0";
+      
+      }, 40);
+      
+      setInterval(() => {
+         cropWindow.style.transition = "0.5s";
+         top1.style.transition = "0.5s";
+      }, 70);
+
+      setInterval(() => {
+         cropWindow.style.display = "flex";
+         top1.style.opacity = "1";
+         root.style.backgroundColor = "rgba(0,0,0,0.2)";
+
+         let cropSelectDiv = document.createElement("div");
+         cropSelectDiv.className = "cropSelectDiv";
+         canvas.append(cropSelectDiv);
+
+      }, 100);
+   });
+
    
    //remove elements
    } else if (Counter1 === 2) {
