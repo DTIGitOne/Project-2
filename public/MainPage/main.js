@@ -15,6 +15,53 @@ image.setAttribute('src' , '../../uploads/dog2.jpeg');
 image.className = "image";
 canvas.append(image);
 
+function getAverageColor(element) {
+   return new Promise((resolve, reject) => {
+      let canvas1 = document.createElement("canvas");
+      let context = canvas1.getContext("2d");
+
+      canvas1.width = element.clientWidth;
+      canvas1.height = element.clientHeight;
+
+      element.onload = function () {
+          context.drawImage(element, 0, 0, canvas1.width, canvas1.height);
+
+          let imageData = context.getImageData(0, 0, canvas1.width, canvas1.height).data;
+
+          let sumRed = 0,
+              sumGreen = 0,
+              sumBlue = 0;
+
+          for (let i = 0; i < imageData.length; i += 4) {
+              sumRed += imageData[i];
+              sumGreen += imageData[i + 1];
+              sumBlue += imageData[i + 2];
+          }
+
+          let averageRed = Math.round(sumRed / (imageData.length / 4));
+          let averageGreen = Math.round(sumGreen / (imageData.length / 4));
+          let averageBlue = Math.round(sumBlue / (imageData.length / 4));
+
+          resolve(`rgb(${averageRed}, ${averageGreen}, ${averageBlue})`);
+      };
+
+      element.onerror = reject; 
+
+      element.src = "../../uploads/dog2.jpeg";
+  });
+}
+
+let colorIcon;
+
+getAverageColor(image)
+    .then((color) => {
+        colorIcon = color;
+    })
+    .catch((error) => {
+        console.error(error);
+    });
+
+
 let menuCounter = 0;
 
 dropDrag.addEventListener("click" , function() {
@@ -36,31 +83,28 @@ function removeChildren() {
   }
 }
 
-let Counter1 = 0
+let Counter1 = 0;
 
-brightness.addEventListener("click" , function(){
+crop.addEventListener("click" , function(){
    //remove selected color on all other elements
    iconsSize2.style.color = "white";
    
    //remove other selected elements
    if (layer2.childElementCount > 0) {
       removeChildren();
-      dropMenu.style.height = "200px";
-      layer2.style.display = "none";
+      layer2.style.opacity = "1";
+      Counter2 = 0;
    } 
 
    Counter1++
 
    //create elements 
    if (Counter1 === 1) {
-
-   let colorRandom1 = '#' + parseInt(Math.random() * 0xffffff).toString(16);
-
-   iconsSize1.style.color = colorRandom1;
+   
+   layer2.style.opacity = "1";
+   
+   iconsSize1.style.color = colorIcon;
    iconsSize1.style.opacity = "0.85";
-
-   layer2.style.display = "flex";
-   dropMenu.style.height = "400px";
 
    let box1 = document.createElement("div");
    box1.className = "IconsBox";
@@ -76,13 +120,13 @@ brightness.addEventListener("click" , function(){
       removeChildren();
       iconsSize1.style.color = "white";
       iconsSize2.style.color = "white";
+      Counter1 = 0;
       Counter2 = 0;
-      layer2.style.display = "none";
-      dropMenu.style.height = "200px";
+      layer2.style.opacity = "1";
    }
 });
 
-let Counter2 = 0
+let Counter2 = 0;
 
 brightness.addEventListener("click" , function(){
    //remove selected color on all other elements
@@ -91,22 +135,19 @@ brightness.addEventListener("click" , function(){
    //remove other selected elements
    if (layer2.childElementCount > 0) {
       removeChildren();
-      dropMenu.style.height = "200px";
-      layer2.style.display = "none";
+      layer2.style.opacity = "1";
+      Counter1 = 0;
    } 
 
    Counter2++
 
    //create elements 
    if (Counter2 === 1) {
-
-   let colorRandom1 = '#' + parseInt(Math.random() * 0xffffff).toString(16);
-
-   iconsSize2.style.color = colorRandom1;
+   
+   layer2.style.opacity = "1";
+   
+   iconsSize2.style.color = colorIcon;
    iconsSize2.style.opacity = "0.85";
-
-   layer2.style.display = "flex";
-   dropMenu.style.height = "400px";
 
    let box1 = document.createElement("div");
    box1.className = "IconsBox";
@@ -122,8 +163,9 @@ brightness.addEventListener("click" , function(){
       removeChildren();
       iconsSize1.style.color = "white";
       iconsSize2.style.color = "white";
+      Counter1 = 0;
       Counter2 = 0;
-      layer2.style.display = "none";
-      dropMenu.style.height = "200px";
+      layer2.style.opacity = "1";
    }
 });
+
