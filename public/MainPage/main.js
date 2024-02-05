@@ -36,22 +36,28 @@ function removeChildren() {
   }
 }
 
-let Counter1 = 0;
+let Counter1 = 0
 
-crop.addEventListener("click" , function(){
-
+brightness.addEventListener("click" , function(){
+   //remove selected color on all other elements
+   iconsSize2.style.color = "white";
+   
+   //remove other selected elements
    if (layer2.childElementCount > 0) {
       removeChildren();
-      
-   } else {
-      
-   }
+      dropMenu.style.height = "200px";
+      layer2.style.display = "none";
+   } 
 
    Counter1++
 
+   //create elements 
    if (Counter1 === 1) {
+
    let colorRandom1 = '#' + parseInt(Math.random() * 0xffffff).toString(16);
 
+   iconsSize1.style.color = colorRandom1;
+   iconsSize1.style.opacity = "0.85";
 
    layer2.style.display = "flex";
    dropMenu.style.height = "400px";
@@ -60,18 +66,17 @@ crop.addEventListener("click" , function(){
    box1.className = "IconsBox";
    layer2.append(box1);
 
-   let imageCrop = document.createElement("div");
-   imageCrop.innerHTML = "crop_original";
-   imageCrop.className = "material-icons iconsSize1";
-   box1.append(imageCrop);
-
-   iconsSize1.style.color = colorRandom1;
-   iconsSize1.style.opacity = "0.85";
-
+   let crop1 = document.createElement("div");
+   crop1.className = "material-icons iconsSize2";
+   crop1.innerHTML = "crop";
+   box1.append(crop1);
+   
+   //remove elements
    } else if (Counter1 === 2) {
       removeChildren();
       iconsSize1.style.color = "white";
-      Counter1 = 0;
+      iconsSize2.style.color = "white";
+      Counter2 = 0;
       layer2.style.display = "none";
       dropMenu.style.height = "200px";
    }
@@ -80,13 +85,45 @@ crop.addEventListener("click" , function(){
 let Counter2 = 0
 
 brightness.addEventListener("click" , function(){
+   //remove selected color on all other elements
+   iconsSize1.style.color = "white";
    
+   //remove other selected elements
    if (layer2.childElementCount > 0) {
       removeChildren();
       dropMenu.style.height = "200px";
       layer2.style.display = "none";
-   } else {
-      
-   }
+   } 
 
+   Counter2++
+
+   //create elements 
+   if (Counter2 === 1) {
+
+   let colorRandom1 = '#' + parseInt(Math.random() * 0xffffff).toString(16);
+
+   iconsSize2.style.color = colorRandom1;
+   iconsSize2.style.opacity = "0.85";
+
+   layer2.style.display = "flex";
+   dropMenu.style.height = "400px";
+
+   let box1 = document.createElement("div");
+   box1.className = "IconsBox";
+   layer2.append(box1);
+
+   let brightness1 = document.createElement("div");
+   brightness1.className = "material-icons iconsSize2";
+   brightness1.innerHTML = "brightness_4";
+   box1.append(brightness1);
+   
+   //remove elements
+   } else if (Counter2 === 2) {
+      removeChildren();
+      iconsSize1.style.color = "white";
+      iconsSize2.style.color = "white";
+      Counter2 = 0;
+      layer2.style.display = "none";
+      dropMenu.style.height = "200px";
+   }
 });
