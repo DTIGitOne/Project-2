@@ -15,12 +15,13 @@ let topMenu = document.getElementById("topMenu");
 let bottom = document.getElementById("bottom");
 let top1 = document.getElementById("top");
 let cancelButton = document.getElementById("cancelButton");
+let widthInput2 = document.getElementById("widthInput");
 
 let image = document.createElement('img');
 image.setAttribute('src' , '../../uploads/dog2.jpeg');
 image.className = "image";
 canvas.append(image);
-1
+
 function getAverageColor(element) {
    return new Promise((resolve, reject) => {
       let canvas1 = document.createElement("canvas");
@@ -125,7 +126,7 @@ crop.addEventListener("click" , function(){
    crop1.addEventListener('click' , function(){
       crop1.style.color = colorIcon;
 
-      setInterval(() => {
+      setTimeout(() => {
    
       layer1.style.opacity = "1";
 
@@ -136,19 +137,121 @@ crop.addEventListener("click" , function(){
       
       }, 40);
       
-      setInterval(() => {
+      setTimeout(() => {
          cropWindow.style.transition = "0.5s";
          top1.style.transition = "0.5s";
       }, 70);
 
-      setInterval(() => {
+      setTimeout(() => {
          cropWindow.style.display = "flex";
          top1.style.opacity = "1";
          root.style.backgroundColor = "rgba(0,0,0,0.2)";
+         widthInput2.style.display = "flex";
 
          let cropSelectDiv = document.createElement("div");
          cropSelectDiv.className = "cropSelectDiv";
          canvas.append(cropSelectDiv);
+         
+         for (let p = 0 ; p <=9 ; p++) {
+            let cropChild = document.createElement("div");
+            cropChild.className = "cropChild";
+            cropSelectDiv.append(cropChild);
+         }
+
+         const rect = cropSelectDiv.getBoundingClientRect();
+
+         const width1 = rect.width;
+         const height1 = rect.height;
+
+         widthInput2.placeholder = width1  + "x" +  height1;
+
+         const InputSizeRegex = /^[1-9]{1,4}[x]{1}[1-9]{1,4}$/;
+         const matches =  widthInput2.value.match(InputSizeRegex);
+         
+         let widthInput;
+         let heightInput;
+
+         if (matches) {
+            widthInput = parseInt(matches[1], 10);
+            heightInput = parseInt(matches[2], 10);
+
+            console.log(widthInput);
+            console.log(heightInput);
+         }
+
+         
+
+         widthInput2.addEventListener('input', function () {
+            const inputValue = this.value;
+            const updatedValue = inputValue.replace(/\s/g, 'x');
+            this.value = updatedValue;
+        });
+
+        let isResizing = false;
+        let startX, startY, startWidth, startHeight;
+
+        cropSelectDiv.addEventListener('mousedown', (e) => {
+            if (e.target === cropSelectDiv) {
+                isResizing = true;
+                startX = e.clientX;
+                startY = e.clientY;
+                startWidth = cropSelectDiv.offsetWidth;
+                startHeight = cropSelectDiv.offsetHeight;
+
+                document.addEventListener('mousemove', handleMouseMove);
+                document.addEventListener('mouseup', () => {
+                    isResizing = false;
+                    document.removeEventListener('mousemove', handleMouseMove);
+                });
+            }
+        });
+
+        function handleMouseMove(e) {
+            if (isResizing) {
+                const deltaX = e.clientX - startX;
+                const deltaY = e.clientY - startY;
+
+                let newWidth = Math.max(10, startWidth + deltaX);
+                let newHeight =Math.max(10, startHeight + deltaY);
+
+                cropSelectDiv.style.width = `${newWidth}px`;
+                cropSelectDiv.style.height = `${newHeight}px`;
+            }
+        }
+
+        cropSelectDiv.addEventListener('mousemove', (e) => {
+            if (!isResizing) {
+               cropSelectDiv.style.cursor = 'move';
+            }
+        });
+
+        cropSelectDiv.addEventListener('mouseout', () => {
+         cropSelectDiv.style.cursor = 'default';
+        });
+
+        cropSelectDiv.addEventListener('mousedown', (e) => {
+            if (!isResizing) {
+                startX = e.clientX - cropSelectDiv.getBoundingClientRect().left;
+                startY = e.clientY - cropSelectDiv.getBoundingClientRect().top;
+
+                document.addEventListener('mousemove', handleDragMouseMove);
+                document.addEventListener('mouseup', () => {
+                    document.removeEventListener('mousemove', handleDragMouseMove);
+                });
+            }
+        });
+
+        function handleDragMouseMove(e) {
+            const newLeft = e.clientX - startX;
+            const newTop = e.clientY - startY;
+
+            cropSelectDiv.style.left = `${newLeft}px`;
+            cropSelectDiv.style.top = `${newTop}px`;
+        }
+
+        cropSelectDiv.style.maxWidth = widthInput + "px";
+        cropSelectDiv.style.maxHeight = heightInput + "px";
+
 
       }, 100);
    });
